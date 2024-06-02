@@ -60,12 +60,12 @@ const Products = () => {
     });
   };
   console.log("page count", pageCount);
-  const applyFilter = (arr: ProductType[]) => {
+  const applyFilter = (arr: ProductType[] = []) => {
     const updatedProducts = arr
       ?.filter((product) =>
         filters.categories?.length === 0
           ? true
-          : filters.categories.includes(product?.category)
+          : filters?.categories.includes(product?.category)
       )
       ?.filter((product) =>
         filters.priceRange.length === 2
