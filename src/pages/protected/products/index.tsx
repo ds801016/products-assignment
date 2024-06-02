@@ -62,8 +62,8 @@ const Products = () => {
   console.log("page count", pageCount);
   const applyFilter = (arr: ProductType[]) => {
     const updatedProducts = arr
-      .filter((product) =>
-        filters.categories.length === 0
+      ?.filter((product) =>
+        filters.categories?.length === 0
           ? true
           : filters.categories.includes(product?.category)
       )
@@ -286,7 +286,7 @@ const Filters = (props: FilterPropTYpe) => {
                 }))
               }
               options={props.categories.filter(
-                (row) => !props.filters.categories.includes(row.value) && row
+                (row) => !props.filters.categories.includes(row?.value) && row
               )}
             />
           </div>
