@@ -29,7 +29,7 @@ import MySelect from "@/components/form/select";
 import { Slider } from "@/components/ui/slider";
 import { Input } from "@/components/ui/input";
 
-const limit = 10;
+const limit = 5;
 const Products = () => {
   const [products, setProducts] = useState<ProductType[]>([]);
   const [currentPage, setCurrentPage] = useState(1);
@@ -119,7 +119,7 @@ const Products = () => {
           <Input
             value={searchString}
             onChange={(e) => setSearchString(e.target.value)}
-            className="w-[400px]"
+            className="w-full max-w-[400px]"
             placeholder="Search Product..."
             prefix={<Search size={18} />}
           />
@@ -147,14 +147,14 @@ const Products = () => {
           </p>
         </div>
       )}
-      <div className=" flex-1">
-        <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-5 gap-4 ">
+      <div className=" h-[90] overflow-auto ">
+        <div className="grid grid-cols-1  md:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-5 gap-4 ">
           {applyFilter(products ?? []).afterPagination.map((product) => (
             <ProductCard product={product} />
           ))}
         </div>
       </div>
-      <div className="flex justify-center">
+      <div className="flex justify-center mt-4 mb-2">
         <Pagination>
           <PaginationContent>
             <PaginationItem
@@ -239,8 +239,10 @@ const ProductCard = (props: ProductCardPropType) => {
               <p>{props.product.rating.count} Reviews</p>
             </div>
             <div className="flex justify-between mt-2 rounded-b-lg bg-primary text-white p-2 px-4">
-              <h2 className="text-xl font-[500]">{props.product.price}/-</h2>
-              <p className="text-lg capitalize">{props.product.category}</p>
+              <h2 className="lg:text-xl lgfont-[500]">
+                {props.product.price}/-
+              </h2>
+              <p className="lg:text-lg capitalize">{props.product.category}</p>
               {/* <p>Rating: {props.product.rating.rate}/5</p> */}
             </div>
           </div>

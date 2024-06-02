@@ -79,7 +79,7 @@ const Sidebar = () => {
       onBlur={() => toggleSecondary(false)}
       className="overflow-x-visible relative h-full"
     >
-      <div className="h-full  flex flex-col gap-0 items-center overflow-y-auto  px-6 py-4 rounded-lg shadow-md min-w-[300px] bg-white bg-opacity-10 backdrop-blur-sm">
+      <div className="h-full  flex flex-col gap-0 items-center overflow-y-auto  lg:px-6 py-4 rounded-lg lg:shadow-md lg:min-w-[300px] lg:bg-white lg:bg-opacity-40 lg:backdrop-blur-md">
         <div className="w-full flex-1 flex flex-col ">
           <div className="flex justify-center ">
             {/* <Link to={routeConstants.app.home}>
@@ -146,9 +146,9 @@ const Sidebar = () => {
           </div>
         </div> */}
       </div>
-      {showSecondary && selectedItem && (
+      {/* {showSecondary && selectedItem && (
         <SecondarySideBar pathName={pathName} selectedItem={selectedItem} />
-      )}
+      )} */}
     </div>
   );
 };
@@ -218,7 +218,7 @@ interface SecondaryProps extends DialogPropType {
 const SecondarySideBar = (props: SecondaryProps) => {
   const { user } = useUser();
   return (
-    <div className="bg-white bg-opacity-40 backdrop-blur-md py-4 px-2 h-full w-[250px] absolute top-0 left-[100%] shadow-md rounded-lg z-[99]">
+    <div className="bg-white lg:bg-opacity-40 lg:backdrop-blur-md py-4 px-2 h-screen lg:h-full lg:w-[250px] absolute top-[-1.8%] lg:top-0 left-[108%] lg:left-[100%] shadow-md lg:rounded-lg z-[99]">
       <div className="flex border-b mb-2 text-accent border-b-muted justify-center p-4 items-center gap-2 ">
         {props.selectedItem?.icon}
 
@@ -251,13 +251,6 @@ const items: ItemType[] = [
   {
     icon: <CalendarDays size={20} />,
     label: "Products",
-    children: [
-      {
-        label: "List Products",
-
-        to: routeConstants.app.products,
-        icon: <CalendarDays size={20} />,
-      },
-    ],
+    to: routeConstants.app.products,
   },
 ];
