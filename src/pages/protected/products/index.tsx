@@ -98,7 +98,9 @@ const Products = () => {
 
   useEffect(() => {
     if (products.length) {
-      handleUpdatePageCount(applyFilter(products).beforePagination.length);
+      handleUpdatePageCount(
+        applyFilter(products ?? []).beforePagination.length
+      );
     }
     // console.log(
     //   "length updated",
@@ -109,7 +111,7 @@ const Products = () => {
   return (
     <Standard
       title={`Our Products (${
-        applyFilter(products).beforePagination.length
+        applyFilter(products ?? []).beforePagination.length
       }) Found`}
       extra={
         <div className="flex items-center gap-2">
@@ -132,7 +134,7 @@ const Products = () => {
       <Filters
         filters={filters}
         setFilters={setFilters}
-        categories={categories}
+        categories={categories ?? []}
         show={showFilters}
         hide={() => setShowFilters(false)}
         products={products}
@@ -146,7 +148,7 @@ const Products = () => {
       )}
       <div className=" flex-1">
         <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-5 gap-4 ">
-          {applyFilter(products).afterPagination.map((product) => (
+          {applyFilter(products ?? []).afterPagination.map((product) => (
             <ProductCard product={product} />
           ))}
         </div>
