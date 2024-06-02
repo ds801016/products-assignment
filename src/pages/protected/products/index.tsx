@@ -67,20 +67,20 @@ const Products = () => {
           ? true
           : filters.categories.includes(product?.category)
       )
-      .filter((product) =>
+      ?.filter((product) =>
         filters.priceRange.length === 2
           ? product.price > filters.priceRange[0] &&
             product.price < filters.priceRange[1]
           : product
       )
-      .filter((product) =>
+      ?.filter((product) =>
         searchString.length === 0
           ? product
           : product.title.toLowerCase().includes(searchString.toLowerCase())
       );
 
     // handleUpdatePageCount(updatedProducts.length);
-    const afterPagination = updatedProducts.filter(
+    const afterPagination = updatedProducts?.filter(
       (_, index) =>
         index >= limit * (currentPage - 1) && index < limit * currentPage
     );
@@ -261,11 +261,11 @@ interface FilterPropTYpe extends DialogPropType {
   products: ProductType[];
 }
 const Filters = (props: FilterPropTYpe) => {
-  console.log("these are the categories", props.filters);
+  console.log("these are the categories", props?.filters);
   const removeCategory = (cat) => {
     props.setFilters((row) => ({
       ...row,
-      categories: row.categories.filter((category) => category !== cat),
+      categories: row.categories?.filter((category) => category !== cat),
     }));
   };
   return (
@@ -285,8 +285,8 @@ const Filters = (props: FilterPropTYpe) => {
                   categories: [...curr.categories, value],
                 }))
               }
-              options={props.categories.filter(
-                (row) => !props.filters.categories.includes(row?.value) && row
+              options={props.categories?.filter(
+                (row) => !props?.filters.categories.includes(row?.value) && row
               )}
             />
           </div>
