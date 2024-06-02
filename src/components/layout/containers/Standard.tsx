@@ -41,7 +41,7 @@ const Standard = ({
       )}
       {(title || extra) && (
         <div className="w-full mb-6 flex justify-between">
-          <div className="flex gap-2 w-full justify-between items-center">
+          <div className="flex flex-col lg:flex-row gap-2 w-full justify-between items-center">
             <h1 className="text-2xl capitalize font-semibold">{title}</h1>
 
             {extra}
