@@ -51,6 +51,7 @@ const Products = () => {
     setCategories([]);
     setProducts([]);
     const response: ProductType[] = await execFun(() => getProducts(), "fetch");
+
     setProducts(response);
     handleUpdatePageCount(response.length);
     const categorySet: Set<string> = new Set();
