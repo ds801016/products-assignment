@@ -23,13 +23,21 @@ import {
   DialogContent,
   DialogHeader,
   DialogTitle,
+  DialogTrigger,
 } from "@/components/ui/dialog";
 import MySelect from "@/components/form/select";
 
 import { Slider } from "@/components/ui/slider";
 import { Input } from "@/components/ui/input";
+import { MyTooltip } from "@/components/shared/MyToolTip";
+import {
+  HoverCard,
+  HoverCardContent,
+  HoverCardTrigger,
+} from "@/components/ui/hover-card";
+import { Button } from "@/components/ui/button";
 
-const limit = 5;
+const limit = 10;
 const Products = () => {
   const [products, setProducts] = useState<ProductType[]>([]);
   const [currentPage, setCurrentPage] = useState(1);
@@ -37,6 +45,7 @@ const Products = () => {
   const [categories, setCategories] = useState<SelectOptionType[]>([]);
   const [showFilters, setShowFilters] = useState(false);
   const [searchString, setSearchString] = useState("");
+
   const [filters, setFilters] = useState<{
     categories: string[];
     priceRange: number[];
@@ -140,6 +149,7 @@ const Products = () => {
         hide={() => setShowFilters(false)}
         products={products}
       />
+
       {loading("fetch") && (
         <div className="flex flex-1 items-center justify-center">
           <p className="font-semibold text-muted-foreground ">
@@ -147,10 +157,10 @@ const Products = () => {
           </p>
         </div>
       )}
-      <div className=" h-[90] overflow-auto ">
+      <div className=" h-[90%] overflow-auto px-4">
         <div className="grid grid-cols-1  md:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-5 gap-4 ">
           {applyFilter(products ?? []).afterPagination.map((product) => (
-            <ProductCard product={product} />
+            <ProductCard key={product.id} product={product} />
           ))}
         </div>
       </div>
@@ -222,7 +232,7 @@ interface ProductCardPropType {
 }
 const ProductCard = (props: ProductCardPropType) => {
   return (
-    <div>
+    <div className="relative">
       <Card>
         <CardContent className="p-0 hover:bg-muted">
           <div className="flex justify-center pt-4">
@@ -237,6 +247,14 @@ const ProductCard = (props: ProductCardPropType) => {
             <div className="flex justify-between px-4">
               <p>Rating: {props.product.rating.rate}/5</p>
               <p>{props.product.rating.count} Reviews</p>
+            </div>
+            <div className="text-sm text-muted-foreground">
+              <div className="flex gap-1 multiple-line-elippse px-4">
+                {props.product.description}
+              </div>
+              <DescriptionDialog product={props.product}>
+                <Button variant={"link"}>Read More</Button>
+              </DescriptionDialog>
             </div>
             <div className="flex justify-between mt-2 rounded-b-lg bg-primary text-white p-2 px-4">
               <h2 className="lg:text-xl lgfont-[500]">
@@ -333,6 +351,26 @@ const Filters = (props: FilterPropTYpe) => {
             </div>
           </div>
         </div>
+      </DialogContent>
+    </Dialog>
+  );
+};
+
+interface DescriptionProps {
+  product: ProductType | null;
+  children: React.ReactNode;
+}
+const DescriptionDialog = (props: DescriptionProps) => {
+  return (
+    <Dialog>
+      <DialogTrigger>{props.children}</DialogTrigger>
+      <DialogContent>
+        <DialogHeader>
+          <DialogTitle className="pr-5">{props.product?.title}</DialogTitle>
+        </DialogHeader>
+        <p className="leading-relaxed text-muted-foreground text-[13px]">
+          {props.product?.description}
+        </p>
       </DialogContent>
     </Dialog>
   );

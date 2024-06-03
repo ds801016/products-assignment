@@ -24,7 +24,7 @@ const Standard = ({
   return (
     <div
       className={cn(
-        "px-4 flex-1  w-full flex item flex-col overflow-x-hidden  h-full md:px-[30px] lg:[px-80px] xl:px-[100px] 2xl:px-[200px]  pt-[20px]",
+        "px-4 flex-1  w-full flex item flex-col overflow-x-hidden  h-full md:px-[30px] lg:[px-50px] xl:px-[50px] 2xl:px-[200px]  pt-[20px]",
         className
       )}
     >
